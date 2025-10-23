@@ -37,7 +37,7 @@ An interactive 3D protein structure visualization application built with Vite an
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd protein-viz-demo
+cd albinos-protein-viewer
 
 # Install dependencies
 npm install
