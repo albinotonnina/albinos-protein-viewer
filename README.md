@@ -16,12 +16,6 @@ An interactive 3D protein structure visualization application that lets you expl
 - **Interactive Exploration**: Drag to rotate, scroll to zoom, right-click to pan—total control over your investigation
 - **Enhanced Discovery**: Auto-spin mode for continuous observation and immersive viewing
 
-### User Interface
-- **Intuitive Design**: Clean, accessible interface that gets out of the way so you can focus on discovery
-- **Responsive Across Devices**: Explore on desktop, tablet, or mobile—your curiosity isn't limited by device
-- **Beautiful Visualization**: Modern design with gradient accents to enhance the viewing experience
-- **Practical Tools**: Screenshot capture to save your discoveries, fullscreen mode for immersion, and view reset
-
 ## 🛠️ Technical Stack
 
 - **Vite** - Lightning-fast build tool and dev server
@@ -53,19 +47,6 @@ npm run dev
 5. **Control the View**: Use mouse controls to rotate, zoom, and pan
 6. **Take Screenshots**: Capture the current view as a PNG image
 7. **Go Fullscreen**: Maximize the viewer for detailed analysis
-
-## 🎨 Design Highlights
-
-### Color Palette
-- **Clean Canvas**: Bright white background for clear focus
-- **Accent Colors**: Indigo to purple gradient (#6366f1 → #8b5cf6) to highlight interactive elements
-- **Visual Clarity**: High-contrast design for comfortable exploration
-
-### User Experience
-- **Instant Feedback**: Responsive interactions keep you engaged
-- **Loading States**: Clear indicators as data arrives
-- **Smooth Navigation**: Effortless exploration of molecular structures
-- **Accessibility**: Clear visual hierarchy and high contrast ratios
 
 ## 🔬 Protein Structures Included
 
@@ -107,7 +88,6 @@ The built files will be in the `dist` folder, ready for deployment to any static
 
 ## 📚 Learning Resources
 
-- [3DMol.js Documentation](https://3dmol.csb.pitt.edu/)
 - [RCSB Protein Data Bank](https://www.rcsb.org/)
 - [Vite Documentation](https://vitejs.dev/)
 
