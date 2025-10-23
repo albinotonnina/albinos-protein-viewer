@@ -77,6 +77,16 @@ function init() {
   createParticleCanvas();
   animateParticles();
   animateRainbowHue();
+  
+  // Recalculate particle canvas size after layout is fully ready
+  setTimeout(() => {
+    const canvas = document.getElementById('particleCanvas');
+    const viewer = document.getElementById('viewer');
+    if (canvas && viewer) {
+      canvas.width = viewer.clientWidth;
+      canvas.height = viewer.clientHeight;
+    }
+  }, 100);
 }
 
 // Load protein from PDB database
@@ -265,12 +275,24 @@ function createParticleCanvas() {
   
   const canvas = document.createElement('canvas');
   canvas.id = 'particleCanvas';
-  canvas.width = viewer.clientWidth;
-  canvas.height = viewer.clientHeight;
+  
+  // Ensure viewer dimensions are available
+  let width = viewer.clientWidth || window.innerWidth;
+  let height = viewer.clientHeight || window.innerHeight;
+  
+  // Fallback if dimensions are still 0 (page just loading)
+  if (width === 0 || height === 0) {
+    width = window.innerWidth;
+    height = window.innerHeight / 2;
+  }
+  
+  canvas.width = width;
+  canvas.height = height;
   canvas.style.position = 'absolute';
   canvas.style.top = '0';
   canvas.style.left = '0';
   canvas.style.pointerEvents = 'none';
+  canvas.style.display = 'block';
   viewer.appendChild(canvas);
 
   // Initialize particles
@@ -281,8 +303,10 @@ function createParticleCanvas() {
 
   // Handle resize
   const resizeHandler = () => {
-    canvas.width = viewer.clientWidth;
-    canvas.height = viewer.clientHeight;
+    const newWidth = viewer.clientWidth || window.innerWidth;
+    const newHeight = viewer.clientHeight || window.innerHeight / 2;
+    canvas.width = newWidth;
+    canvas.height = newHeight;
   };
   
   window.addEventListener('resize', resizeHandler);
