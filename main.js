@@ -327,6 +327,14 @@ function showLoading(show) {
   }
 }
 
+// Utility function to scroll to top in portrait mode
+function scrollToTopIfNeeded() {
+  // Only scroll in portrait mode (width < 768px)
+  if (window.innerWidth < 768) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
 // Setup all event listeners
 function setupEventListeners() {
   // Protein selection buttons
@@ -344,6 +352,7 @@ function setupEventListeners() {
       
       loadProtein(pdbId);
       updateInfo();
+      scrollToTopIfNeeded();
     });
   });
 
@@ -358,6 +367,7 @@ function setupEventListeners() {
 
       state.currentStyle = style;
       applyVisualization();
+      scrollToTopIfNeeded();
     });
   });
 
@@ -369,6 +379,7 @@ function setupEventListeners() {
     } else {
       stopSpin();
     }
+    scrollToTopIfNeeded();
   });
 
   // Particles toggle
@@ -376,6 +387,7 @@ function setupEventListeners() {
   if (particlesToggle) {
     particlesToggle.addEventListener('change', (e) => {
       state.particlesEnabled = e.target.checked;
+      scrollToTopIfNeeded();
     });
   }
 
@@ -393,6 +405,7 @@ function setupEventListeners() {
       loadProtein(pdbId);
       updateInfo();
       input.value = '';
+      scrollToTopIfNeeded();
     } else {
       alert('Please enter a valid 4-character PDB ID');
     }
