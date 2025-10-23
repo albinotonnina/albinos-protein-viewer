@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Albino's Protein Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h1>Albino's Protein <span class="highlight">Visualizer</span></h1>
+          </div>
+          <div class="tagline">Interactive 3D Molecular Visualization</div>
+        </div>
+      </header>
+
+      <!-- Main Container -->
+      <div class="container">
+        <!-- Viewer Container -->
+        <main class="viewer-container">
+          <div class="viewer-header">
+            <h2 id="viewerTitle">Myoglobin Structure</h2>
+            <div class="viewer-controls">
+              <button class="control-btn" id="resetView" title="Reset View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 3v5h-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="control-btn" id="screenshot" title="Take Screenshot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="13" r="4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="control-btn" id="fullscreen" title="Fullscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="viewer" class="viewer">
+            <div id="proteinInfo" class="protein-info-overlay">
+              <div class="info-content">
+                <p style="color: var(--text-tertiary); font-size: 0.875rem;">Loading protein information...</p>
+              </div>
+            </div>
+          </div>
+          <div id="proteinInfoMobile" class="protein-info-mobile"></div>
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading protein structure...</p>
+          </div>
+        </main>
+
+        <!-- Control Panel -->
+        <aside class="control-panel">
+          <div class="control-column">
+            <div class="panel-section">
+              <h3>Select Protein</h3>
+              <div class="protein-grid">
+                <button class="protein-btn active" data-pdb="1MBN" data-name="Myoglobin">
+                  <div class="protein-icon">🔴</div>
+                  <span>Myoglobin</span>
+                  <small>1MBN</small>
+                </button>
+                <button class="protein-btn" data-pdb="2DHB" data-name="Hemoglobin">
+                  <div class="protein-icon">🟣</div>
+                  <span>Hemoglobin</span>
+                  <small>2DHB</small>
+                </button>
+                <button class="protein-btn" data-pdb="1CRN" data-name="Crambin">
+                  <div class="protein-icon">🟢</div>
+                  <span>Crambin</span>
+                  <small>1CRN</small>
+                </button>
+                <button class="protein-btn" data-pdb="1UBQ" data-name="Ubiquitin">
+                  <div class="protein-icon">🔵</div>
+                  <span>Ubiquitin</span>
+                  <small>1UBQ</small>
+                </button>
+                <button class="protein-btn" data-pdb="1AKI" data-name="Adenylate Kinase">
+                  <div class="protein-icon">🟡</div>
+                  <span>Adenylate K.</span>
+                  <small>1AKI</small>
+                </button>
+                <button class="protein-btn" data-pdb="1L2Y" data-name="Insulin">
+                  <div class="protein-icon">🟠</div>
+                  <span>Insulin</span>
+                  <small>1L2Y</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="panel-section">
+              <h3>Visualization Style</h3>
+              <div class="style-options">
+                <button class="style-btn active" data-style="cartoon">Cartoon</button>
+                <button class="style-btn" data-style="stick">Stick</button>
+                <button class="style-btn" data-style="sphere">Sphere</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-column">
+            <div class="panel-section">
+              <h3>Effects</h3>
+              <div class="toggle-group">
+                <label class="toggle">
+                  <input type="checkbox" id="spinToggle" checked>
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Auto Spin</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="particlesToggle" checked>
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Particle Effects</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel-section">
+              <h3>Custom PDB</h3>
+              <div class="custom-pdb">
+                <input type="text" id="customPDB" placeholder="Enter PDB ID (e.g., 3PQR)" maxlength="4">
+                <button id="loadCustom" class="load-btn">Load</button>
+              </div>
+            </div>
+
+            <div class="stats">
+              <div class="stat-item">
+                <span class="stat-label">Current:</span>
+                <span class="stat-value" id="currentProtein">Myoglobin</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">PDB ID:</span>
+                <span class="stat-value" id="currentPDB">1MBN</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Info Banner -->
+      <div class="info-banner">
+        <p>🧬 Drag to rotate • Scroll to zoom • Right-click to pan</p>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
